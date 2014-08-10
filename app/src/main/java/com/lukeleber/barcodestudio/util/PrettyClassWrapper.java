@@ -58,4 +58,23 @@ public class PrettyClassWrapper<T>
     {
         return clazz;
     }
+
+    /**
+     * @param rhs the object to compare
+     * @return true if the provided object is equal to this one, otherwise false
+     * @see Object#equals
+     * <p/>
+     * Specialized equality operator for PrettyClassWrappers that returns
+     * true if the provided object is equal to the internal class held
+     * within this wrapper.
+     */
+    @Override
+    public boolean equals(Object rhs)
+    {
+        if (rhs instanceof PrettyClassWrapper)
+        {
+            return clazz.equals(((PrettyClassWrapper) rhs).unwrap());
+        }
+        return clazz.equals(rhs);
+    }
 }
