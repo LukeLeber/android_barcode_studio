@@ -12,8 +12,10 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.lukeleber.barcodestudio.symbologies.Code39;
+import com.lukeleber.barcodestudio.util.DexClassLoader;
 import com.lukeleber.barcodestudio.util.PrettyClassWrapper;
 
 import java.io.IOException;
@@ -25,10 +27,13 @@ public class BarcodeStudio
         extends
         Activity
 {
-
+    /// Spinner view that holds all supported symbologies
     @InjectView(R.id.symbologies)
     private Spinner symbologies;
 
+    /**
+     * Utilize reflection to load any and all supported symbologies into the GUI spinner view
+     */
     private void populateSymbologies()
     {
         ArrayAdapter<PrettyClassWrapper<Symbology>> adapter
@@ -44,9 +49,10 @@ public class BarcodeStudio
                 adapter.add(new PrettyClassWrapper(c));
             }
             symbologies.setAdapter(adapter);
-        } catch (IOException ioe)
+        }
+        catch (IOException ioe)
         {
-
+            Toast.makeText(this, "Unable to load symbologies", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -60,6 +66,4 @@ public class BarcodeStudio
         Barcode demo = new Barcode("123", new Code39(false, false));
 
     }
-
-
 }
