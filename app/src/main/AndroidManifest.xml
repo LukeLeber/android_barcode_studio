@@ -3,20 +3,19 @@
           package="com.lukeleber.barcodestudio">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-
-
         <uses-sdk
             android:maxSdkVersion="19"
             android:minSdkVersion="19"
             android:targetSdkVersion="19"/>
 
         <activity
-            android:name=".BarcodeStudio"
+            android:name=".gui.BarcodeStudio"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -25,9 +24,12 @@
             </intent-filter>
         </activity>
         <activity
-
-            android:name=".PrintDialogActivity"
-            android:label="@string/title_activity_print_dialog">
+            android:name=".gui.SymbologySettings"
+            android:label="@string/title_activity_symbology_settings">
+        </activity>
+        <activity
+            android:name=".gui.PageSetup"
+            android:label="@string/title_activity_page_setup">
         </activity>
     </application>
 

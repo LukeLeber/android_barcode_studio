@@ -5,8 +5,16 @@
     android:layout_height="match_parent"
     tools:context="${packageName}.${activityClass}">
 
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
-    <TextView
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Select a Symbology"
@@ -18,13 +26,14 @@
         <Spinner
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/symbology"
+            android:id="@+id/symbologies"
             android:layout_weight="1"/>
         <Button
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="settings"
-            android:layout_toRightOf="@+id/symbology"
+            android:layout_toRightOf="@+id/symbologies"
+            android:id="@+id/symbologySettings"
             />
     </LinearLayout>
 
@@ -52,10 +61,12 @@
                     android:layout_height="wrap_content"
                     android:text="Single"
                     android:id="@+id/single"
-                    android:layout_gravity="bottom"/>
+                    android:layout_gravity="bottom"
+                    android:checked="true"/>
+
                 <RadioButton
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="65dp"
                     android:text="Range"
                     android:id="@+id/range"
                     android:checked="false"
@@ -73,6 +84,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/encodingText"
                 android:hint="Encoding Text"
+                android:textSize="12sp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
@@ -83,17 +95,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="# bcs"
+                android:textSize="12sp"
                 android:id="@+id/numPages"
                 android:layout_toRightOf="@+id/encodingText"
                 android:scrollHorizontally="true"
                 android:maxWidth="69dp"
-                />
+                android:layout_alignRight="@+id/range2"
+                android:layout_alignEnd="@+id/range2"/>
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/range1"
                 android:hint="range-min"
+                android:textSize="12sp"
                 android:layout_below="@+id/encodingText"
                 android:scrollHorizontally="true"
                 android:maxWidth="106dp"
@@ -102,6 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TO"
+                android:textSize="12sp"
                 android:layout_toRightOf="@+id/range1"
                 android:layout_below="@+id/encodingText"
                 android:layout_marginTop="12dip"
@@ -111,6 +127,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/range2"
                 android:hint="range-max"
+                android:textSize="12sp"
                 android:layout_below="@+id/numPages"
                 android:layout_toRightOf="@+id/to"
                 android:scrollHorizontally="true"
@@ -133,21 +150,24 @@
             android:layout_width="fill_parent"
             android:layout_height="100sp"
             android:text="Page Setup"
-            android:id="@+id/page_setup"
+            android:textSize="12sp"
+            android:id="@+id/pageSetup"
             android:layout_weight="1"
             />
         <Button
             android:layout_width="fill_parent"
             android:layout_height="100sp"
             android:text="Find Printer"
-            android:id="@+id/find_printer"
+            android:textSize="12sp"
+            android:id="@+id/findPrinter"
             android:layout_weight="1"
             />
         <Button
             android:layout_width="fill_parent"
             android:layout_height="100sp"
             android:text="Print To PDF"
-            android:id="@+id/print_to_pdf"
+            android:textSize="12sp"
+            android:id="@+id/prinToPdf"
             android:layout_weight="1"
             />
     </LinearLayout>
@@ -159,6 +179,7 @@
             android:layout_width="fill_parent"
             android:layout_height="100sp"
             android:text="Preview"
+            android:textSize="12sp"
             android:id="@+id/preview"
             android:layout_weight="1"
             />
@@ -167,6 +188,7 @@
             android:layout_height="100sp"
             android:text="Button"
             android:id="@+id/btn1"
+            android:textSize="12sp"
             android:layout_weight="1"
             />
         <Button
@@ -174,9 +196,11 @@
             android:layout_height="100sp"
             android:text="Button"
             android:id="@+id/btn"
+            android:textSize="12sp"
             android:layout_weight="1"
             />
     </LinearLayout>
-
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
