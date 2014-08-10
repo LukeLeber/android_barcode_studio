@@ -8,11 +8,61 @@
 
 package com.lukeleber.barcodestudio;
 
+import java.io.Serializable;
+
 /**
  * The ultimate base interface for all linear barcode symbologies
  */
 public interface Symbology
+        extends Serializable
 {
+
+    /**
+     * A helper class for building symbology configurations
+     */
+    public static class Configuration
+            implements Serializable
+    {
+        /// Should this Symbology use a checksum digit?
+        protected boolean useChecksum;
+
+        /// Should this Symbology use an extended character set?
+        protected boolean useExtendedCharset;
+
+        public boolean useChecksum()
+        {
+            return useChecksum;
+        }
+
+        public boolean useExtendedCharset()
+        {
+            return useExtendedCharset;
+        }
+
+        /**
+         * Sets the extended charset flag
+         *
+         * @param enabled should the extended charset be enabled?
+         * @return this
+         */
+        public Configuration setExtendedCharsetEnabled(boolean enabled)
+        {
+            this.useExtendedCharset = enabled;
+            return this;
+        }
+
+        /**
+         * Sets the checksum flag
+         *
+         * @param enabled should the checksum be enabled?
+         * @return this
+         */
+        public Configuration setChecksumEnabled(boolean enabled)
+        {
+            this.useChecksum = enabled;
+            return this;
+        }
+    }
 
     /**
      * Is this symbology fixed-length?
@@ -118,4 +168,11 @@ public interface Symbology
      * @return a text string decoded from the provided Sequence
      */
     String decode(Sequence sequence);
+
+    /**
+     * Retrieves the Configuration of this Symbology
+     *
+     * @return the Configuration of this Symbology
+     */
+    Configuration getConfig();
 }

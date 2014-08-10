@@ -159,14 +159,14 @@ public class Code39
     public Sequence encode(String text)
     {
         Map<Character, Sequence> encodingTable
-                = super.useExtendedCharset ? EXTENDED_ENCODING_TABLE : ENCODING_TABLE;
+                = super.getConfig().useExtendedCharset() ? EXTENDED_ENCODING_TABLE : ENCODING_TABLE;
         Sequence rv = new Sequence(QUIET_ZONE).append(START_STOP).append(PAD);
         for (char c : text.toCharArray())
         {
             rv.append(encodingTable.get(c));
             rv.append(PAD);
         }
-        if (super.useChecksum)
+        if (super.getConfig().useChecksum())
         {
             rv.append(encodingTable.get(calculateChecksum(text))).append(PAD);
         }
@@ -177,11 +177,11 @@ public class Code39
     public String decode(Sequence sequence)
     {
         Map<Character, Sequence> encodingTable
-                = super.useExtendedCharset ? EXTENDED_ENCODING_TABLE : ENCODING_TABLE;
+                = super.getConfig().useExtendedCharset() ? EXTENDED_ENCODING_TABLE : ENCODING_TABLE;
 
         /// Traditionally, start / stop sequences are represented as "*"
         String text = "*";
-        for (int i = 9; i < sequence.size() - (super.useChecksum ? 18 : 9); i += 9)
+        for (int i = 9; i < sequence.size() - (super.getConfig().useChecksum() ? 18 : 9); i += 9)
         {
             Sequence slice = sequence.slice(i, i + 8);
             for (Map.Entry<Character, Sequence> e : encodingTable.entrySet())
@@ -212,7 +212,7 @@ public class Code39
     @Override
     public char calculateChecksum(String text)
     {
-        String charset = super.useExtendedCharset ? EXTENDED_CHARSET : CHARSET;
+        String charset = super.getConfig().useExtendedCharset() ? EXTENDED_CHARSET : CHARSET;
         int checksum = 0;
         for (char c : text.toCharArray())
         {
@@ -232,5 +232,13 @@ public class Code39
     {
         super(new Configuration().setChecksumEnabled(useChecksum)
                 .setExtendedCharsetEnabled(useExtendedCharset));
+    }
+
+    /**
+     * Constructs a Code39 with a default configuration
+     */
+    public Code39()
+    {
+        super(new Configuration());
     }
 }

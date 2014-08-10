@@ -59,7 +59,7 @@ public class Industrial_2_of_5
     @Override
     public boolean isChecksumAvailable()
     {
-        return false;
+        return true;
     }
 
     /**
