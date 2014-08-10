@@ -1,5 +1,17 @@
-apply plugin: 'com.android.application'
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        // replace with the current version of the Android plugin
+        classpath 'com.android.tools.build:gradle:0.12.1'
+        // the latest version of the android-apt plugin
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
+    }
+}
 
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
 android {
     compileSdkVersion 'android-L'
     buildToolsVersion "20.0.0"
@@ -17,9 +29,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    dependencies {
+        compile fileTree(include: ['*.jar'], dir: 'libs')
+    }
 }
 
-dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile files('libs/butterknife-5.1.2.jar')
-}
+

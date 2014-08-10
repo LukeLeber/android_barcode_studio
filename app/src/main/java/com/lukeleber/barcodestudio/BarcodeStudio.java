@@ -14,8 +14,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.lukeleber.barcodestudio.symbologies.Code39;
+import com.lukeleber.barcodestudio.util.PrettyClassWrapper;
 
 import java.io.IOException;
+
+import butterknife.InjectView;
 
 
 public class BarcodeStudio
@@ -23,42 +26,40 @@ public class BarcodeStudio
         Activity
 {
 
+    @InjectView(R.id.symbologies)
+    private Spinner symbologies;
+
+    private void populateSymbologies()
+    {
+        ArrayAdapter<PrettyClassWrapper<Symbology>> adapter
+                = new ArrayAdapter<PrettyClassWrapper<Symbology>>(this,
+                R.layout.dummy_dropdown_list_item);
+        try
+        {
+            for (Class<Symbology> c :
+                    new DexClassLoader(this)
+                            .findClasses("com.lukeleber.barcodestudio.symbologies",
+                                    Symbology.class))
+            {
+                adapter.add(new PrettyClassWrapper(c));
+            }
+            symbologies.setAdapter(adapter);
+        } catch (IOException ioe)
+        {
+
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_barcode_studio);
-        Spinner spinner = (Spinner) super.findViewById(R.id.symbologies);
-        ArrayAdapter<PrettyClassWrapper<Symbology>> adapter = new ArrayAdapter<PrettyClassWrapper<Symbology>>(this, R.layout.dummy_dropdown_list_item);
-        try
-        {
-            for (Class<Symbology> c : new DexClassLoader(this).findClasses("com.lukeleber.barcodestudio.symbologies", Symbology.class))
-            {
-                adapter.add(new PrettyClassWrapper(c));
-            }
-            spinner.setAdapter(adapter);
-        } catch (IOException ioe)
-        {
+        populateSymbologies();
 
-        }
         Barcode demo = new Barcode("123", new Code39(false, false));
 
     }
 
-    class PrettyClassWrapper<T>
-    {
-        private final Class<T> clazz;
 
-        PrettyClassWrapper(Class<T> clazz)
-        {
-            this.clazz = clazz;
-        }
-
-        @Override
-        public final String toString()
-        {
-            return clazz.getSimpleName().replace('_', ' ');
-        }
-
-    }
 }
