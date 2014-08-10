@@ -6,9 +6,11 @@
  *
  */
 
-package com.lukeleber.barcodestudio;
+package com.lukeleber.barcodestudio.util;
 
 import android.content.Context;
+
+import com.lukeleber.barcodestudio.Symbology;
 
 import java.io.IOException;
 import java.util.ArrayList;
