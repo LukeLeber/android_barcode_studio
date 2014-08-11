@@ -49,6 +49,7 @@ public class DexClassLoader
      * @param toFind an instance of the generic type
      * @return a collection of all classes that match the search criteria
      */
+    @SuppressWarnings("unchecked")
     public <T> Collection<Class<T>> findClasses(String pkg, Class<T> toFind)
     {
         List<Class<T>> classes = new ArrayList<Class<T>>();
