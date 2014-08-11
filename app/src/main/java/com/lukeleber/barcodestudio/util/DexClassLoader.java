@@ -10,8 +10,6 @@ package com.lukeleber.barcodestudio.util;
 
 import android.content.Context;
 
-import com.lukeleber.barcodestudio.Symbology;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -63,7 +61,7 @@ public class DexClassLoader
                 try
                 {
                     Class<?> c = Class.forName(entry);
-                    if (Symbology.class.isAssignableFrom(c))
+                    if (toFind.isAssignableFrom(c))
                     {
                         classes.add((Class<T>) c);
                     }
