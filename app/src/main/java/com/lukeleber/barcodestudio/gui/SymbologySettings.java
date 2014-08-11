@@ -46,12 +46,22 @@ public class SymbologySettings
     @Override
     public void onBackPressed()
     {
-        super.onBackPressed();
+
         Intent intent = new Intent(this, BarcodeStudio.class);
         intent.putExtra("symbology", symbology);
-        super.startActivity(intent);
+        setResult(Activity.RESULT_OK, intent);
+        finish();
+        super.onBackPressed();
     }
 
+    /*
+       Intent result = new Intent();
+        result.putExtra("page_setup",
+
+        );
+        setResult(Activity.RESULT_OK, result);
+        finish();
+    * */
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

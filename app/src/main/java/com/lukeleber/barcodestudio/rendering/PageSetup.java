@@ -7,7 +7,10 @@
  */
 package com.lukeleber.barcodestudio.rendering;
 
+import java.io.Serializable;
+
 public class PageSetup
+        implements Serializable
 {
     public final float pageWidth;
     public final float pageHeight;
@@ -25,7 +28,6 @@ public class PageSetup
     public final float barCodeHeight;
     public final float columnPadding;
     public final float rowPadding;
-
 
     public PageSetup(Configuration config)
     {
@@ -46,13 +48,14 @@ public class PageSetup
     }
 
 
-    enum Orientation
+    public enum Orientation
     {
         PORTRAIT,
         LANDSCAPE;
     }
 
     public static class Configuration
+            implements Serializable
     {
         private float pageWidth = 8.5f;
         private float pageHeight = 11.0f;

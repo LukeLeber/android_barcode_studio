@@ -9,6 +9,7 @@
 package com.lukeleber.barcodestudio;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -44,9 +45,9 @@ public class BarcodeRenderer
     @Override
     public final void onDraw(Canvas c)
     {
+        Bitmap b = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
         if (barcode != null)
         {
-            System.out.println("Drawing. Barcode. YAY");
             int x = 2;
             Paint black = new Paint(Color.BLACK);
             float startX = 50;

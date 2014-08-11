@@ -19,75 +19,43 @@ import android.widget.Toast;
 import com.lukeleber.barcodestudio.R;
 import com.lukeleber.barcodestudio.Symbology;
 import com.lukeleber.barcodestudio.util.DexClassLoader;
-import com.lukeleber.barcodestudio.util.PrettyClassWrapper;
 
 import java.io.IOException;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
-import butterknife.OnItemSelected;
 
 
 public class BarcodeStudio
         extends
         Activity
 {
+    private final static int PAGE_SETTINGS_RESULT_ID = 0x1;
+    private final static int SYMBOLOGY_SETTINGS_RESULT_ID = 0x2;
+
+    com.lukeleber.barcodestudio.rendering.PageSetup pageSetup = new com.lukeleber.barcodestudio.rendering.PageSetup(new com.lukeleber.barcodestudio.rendering.PageSetup.Configuration());
+
     /// Spinner view that holds all supported symbologies
     @InjectView(R.id.symbologies)
     Spinner symbologies;
     @InjectView(R.id.symbologySettings)
     Button symbologySettings;
-    /// The currently selected Symbology
-    private Symbology selectedSymbology;
-
-    @OnItemSelected(R.id.symbologies)
-    void onItemSelected(int position)
-    {
-        if (selectedSymbology == null || position != getCurrentSymbologyPosition())
-        {
-            PrettyClassWrapper<Symbology> wrapper =
-                    (PrettyClassWrapper<Symbology>) symbologies.getItemAtPosition(position);
-            try
-            {
-                selectedSymbology = wrapper.unwrap().newInstance();
-            }
-            catch (InstantiationException eiie)
-            {
-                eiie.printStackTrace();
-            }
-            catch (IllegalAccessException iae)
-            {
-                iae.printStackTrace();
-            }
-        }
-    }
 
     @OnClick(R.id.symbologySettings)
     public void onConfigureSymbologyClicked()
     {
         Intent intent = new Intent(this, SymbologySettings.class);
-        intent.putExtra("symbology", selectedSymbology);
-        super.startActivity(intent);
+        intent.putExtra("symbology", (Symbology) symbologies.getSelectedItem());
+        super.startActivityForResult(intent, SYMBOLOGY_SETTINGS_RESULT_ID);
     }
 
     @OnClick(R.id.pageSetup)
     public void setupPage()
     {
-        super.finish();
         Intent intent = new Intent(this, PageSetup.class);
-        super.startActivity(intent);
-    }
-
-    /**
-     * Retrieves the spinner position of the currently selected Symbology
-     *
-     * @return the spinner position of the currently selected Symbology
-     */
-    private int getCurrentSymbologyPosition()
-    {
-        return ((ArrayAdapter<PrettyClassWrapper<Symbology>>) symbologies.getAdapter())
-                .getPosition(new PrettyClassWrapper(selectedSymbology.getClass()));
+        intent.putExtra("config", pageSetup);
+        super.startActivityForResult(intent, PAGE_SETTINGS_RESULT_ID);
     }
 
     /**
@@ -95,8 +63,8 @@ public class BarcodeStudio
      */
     private void populateSymbologies()
     {
-        ArrayAdapter<PrettyClassWrapper<Symbology>> adapter
-                = new ArrayAdapter<PrettyClassWrapper<Symbology>>(this,
+        ArrayAdapter<Symbology> adapter
+                = new ArrayAdapter<Symbology>(this,
                 R.layout.dummy_dropdown_list_item);
         try
         {
@@ -105,7 +73,18 @@ public class BarcodeStudio
                             .findClasses("com.lukeleber.barcodestudio.symbologies",
                                     Symbology.class))
             {
-                adapter.add(new PrettyClassWrapper(c));
+                try
+                {
+                    adapter.add(c.newInstance());
+                }
+                catch (InstantiationException ie)
+                {
+                    // todo
+                }
+                catch (IllegalAccessException iae)
+                {
+                    // todo
+                }
             }
             symbologies.setAdapter(adapter);
         }
@@ -118,16 +97,32 @@ public class BarcodeStudio
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        System.out.println("onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_barcode_studio);
         ButterKnife.inject(this);
         populateSymbologies();
+    }
 
-        Symbology symbology = (Symbology) getIntent().getSerializableExtra("symbology");
-        if (symbology != null)
+    @Override
+    protected void onActivityResult(int code, int result, Intent intent)
+    {
+        switch (code)
         {
-            this.selectedSymbology = symbology;
-            this.symbologies.setSelection(getCurrentSymbologyPosition());
+            case PAGE_SETTINGS_RESULT_ID:
+                this.pageSetup = (com.lukeleber.barcodestudio.rendering.PageSetup) intent.getSerializableExtra("page_setup");
+                Toast.makeText(this, "Page settings have been updated.", Toast.LENGTH_SHORT).show();
+                break;
+            case SYMBOLOGY_SETTINGS_RESULT_ID:
+                Symbology modified = (Symbology) intent.getSerializableExtra("symbology");
+                Symbology symbology = (Symbology) symbologies.getSelectedItem();
+                symbology.getConfig().setChecksumEnabled(modified.getConfig().useChecksum());
+                symbology.getConfig().setExtendedCharsetEnabled(modified.getConfig().useExtendedCharset());
+                Toast.makeText(this, "Symbology settings have been updated.", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                Toast.makeText(this, "Unknown response code: " + code, Toast.LENGTH_SHORT).show();
         }
+        super.onActivityResult(code, result, intent);
     }
 }

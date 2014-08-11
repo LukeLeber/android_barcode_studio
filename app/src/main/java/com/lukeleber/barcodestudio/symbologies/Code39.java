@@ -232,6 +232,7 @@ public class Code39
     {
         super(new Configuration().setChecksumEnabled(useChecksum)
                 .setExtendedCharsetEnabled(useExtendedCharset));
+        ;
     }
 
     /**
@@ -240,5 +241,12 @@ public class Code39
     public Code39()
     {
         super(new Configuration());
+        ;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Code-39";
     }
 }

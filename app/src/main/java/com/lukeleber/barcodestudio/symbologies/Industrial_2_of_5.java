@@ -184,4 +184,10 @@ public class Industrial_2_of_5
     {
         super(new Configuration());
     }
+
+    @Override
+    public String toString()
+    {
+        return "Industrial 2 of 5";
+    }
 }
