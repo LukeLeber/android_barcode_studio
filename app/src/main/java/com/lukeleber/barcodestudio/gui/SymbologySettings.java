@@ -35,6 +35,7 @@ public class SymbologySettings
 
     @InjectView(R.id.useChecksum)
     CheckBox useChecksum;
+
     /// The symbology that is being configured
     private Symbology symbology;
 

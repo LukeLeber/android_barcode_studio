@@ -9,7 +9,7 @@ package com.lukeleber.barcodestudio.rendering;
 
 import java.io.Serializable;
 
-public class PageSetup
+public class PrintingMedia
         implements Serializable
 {
     public final float pageWidth;
@@ -24,12 +24,12 @@ public class PageSetup
     ///barcode metrics
     public final int numVerticalBarCodes;
     public final int numHorizontalBarCodes;
-    public final float barCodeWidth;
-    public final float barCodeHeight;
+    public final float barcodeWidth;
+    public final float barcodeHeight;
     public final float columnPadding;
     public final float rowPadding;
 
-    public PageSetup(Configuration config)
+    public PrintingMedia(Configuration config)
     {
         this.pageWidth = config.pageWidth;
         this.pageHeight = config.pageHeight;
@@ -40,11 +40,30 @@ public class PageSetup
         this.marginBottom = config.marginBottom;
         this.numVerticalBarCodes = config.numVerticalBarCodes;
         this.numHorizontalBarCodes = config.numHorizontalBarCodes;
-        this.barCodeHeight = config.barCodeHeight;
-        this.barCodeWidth = config.barCodeWidth;
+        this.barcodeHeight = config.barCodeHeight;
+        this.barcodeWidth = config.barCodeWidth;
         this.columnPadding = config.columnPadding;
         this.rowPadding = config.rowPadding;
 
+    }
+
+    public PrintingMedia scale(float factor)
+    {
+        return new PrintingMedia(new Configuration()
+                .setPageWidth(pageWidth * factor)
+                .setPageHeight(pageHeight * factor)
+                .setMarginLeft(marginLeft * factor)
+                .setMarginRight(marginRight * factor)
+                .setMarginTop(marginTop * factor)
+                .setMarginBottom(marginBottom * factor)
+                .setBarCodeHeight(barcodeHeight * factor)
+                .setBarCodeWidth(barcodeWidth * factor)
+                .setColumnPadding(columnPadding * factor)
+                .setRowPadding(rowPadding * factor)
+                .setOrientation(orientation)
+                .setNumVerticalBarCodes(numVerticalBarCodes)
+                .setNumHorizontalBarCodes(numHorizontalBarCodes)
+        );
     }
 
 

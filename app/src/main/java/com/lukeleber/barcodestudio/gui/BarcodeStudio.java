@@ -12,12 +12,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.lukeleber.barcodestudio.R;
 import com.lukeleber.barcodestudio.Symbology;
+import com.lukeleber.barcodestudio.rendering.PrintingMedia;
 import com.lukeleber.barcodestudio.util.DexClassLoader;
 
 import java.io.IOException;
@@ -34,13 +34,11 @@ public class BarcodeStudio
     private final static int PAGE_SETTINGS_RESULT_ID = 0x1;
     private final static int SYMBOLOGY_SETTINGS_RESULT_ID = 0x2;
 
-    com.lukeleber.barcodestudio.rendering.PageSetup pageSetup = new com.lukeleber.barcodestudio.rendering.PageSetup(new com.lukeleber.barcodestudio.rendering.PageSetup.Configuration());
+    PrintingMedia pageSetup = new PrintingMedia(new PrintingMedia.Configuration());
 
     /// Spinner view that holds all supported symbologies
     @InjectView(R.id.symbologies)
     Spinner symbologies;
-    @InjectView(R.id.symbologySettings)
-    Button symbologySettings;
 
     @OnClick(R.id.symbologySettings)
     public void onConfigureSymbologyClicked()
@@ -53,7 +51,7 @@ public class BarcodeStudio
     @OnClick(R.id.pageSetup)
     public void setupPage()
     {
-        Intent intent = new Intent(this, PageSetup.class);
+        Intent intent = new Intent(this, PrintingMediaSettings.class);
         intent.putExtra("config", pageSetup);
         super.startActivityForResult(intent, PAGE_SETTINGS_RESULT_ID);
     }
@@ -97,7 +95,6 @@ public class BarcodeStudio
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        System.out.println("onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_barcode_studio);
         ButterKnife.inject(this);
@@ -110,15 +107,21 @@ public class BarcodeStudio
         switch (code)
         {
             case PAGE_SETTINGS_RESULT_ID:
-                this.pageSetup = (com.lukeleber.barcodestudio.rendering.PageSetup) intent.getSerializableExtra("page_setup");
-                Toast.makeText(this, "Page settings have been updated.", Toast.LENGTH_SHORT).show();
+                if (intent != null)
+                {
+                    this.pageSetup = (PrintingMedia) intent.getSerializableExtra("page_setup");
+                    Toast.makeText(this, "Page settings have been updated.", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case SYMBOLOGY_SETTINGS_RESULT_ID:
-                Symbology modified = (Symbology) intent.getSerializableExtra("symbology");
-                Symbology symbology = (Symbology) symbologies.getSelectedItem();
-                symbology.getConfig().setChecksumEnabled(modified.getConfig().useChecksum());
-                symbology.getConfig().setExtendedCharsetEnabled(modified.getConfig().useExtendedCharset());
-                Toast.makeText(this, "Symbology settings have been updated.", Toast.LENGTH_SHORT).show();
+                if (intent != null)
+                {
+                    Symbology modified = (Symbology) intent.getSerializableExtra("symbology");
+                    Symbology symbology = (Symbology) symbologies.getSelectedItem();
+                    symbology.getConfig().setChecksumEnabled(modified.getConfig().useChecksum());
+                    symbology.getConfig().setExtendedCharsetEnabled(modified.getConfig().useExtendedCharset());
+                    Toast.makeText(this, "Symbology settings have been updated.", Toast.LENGTH_SHORT).show();
+                }
                 break;
             default:
                 Toast.makeText(this, "Unknown response code: " + code, Toast.LENGTH_SHORT).show();
