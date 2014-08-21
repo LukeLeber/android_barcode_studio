@@ -9,6 +9,7 @@
 package com.lukeleber.barcodestudio.util;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -68,7 +69,9 @@ public class DexClassLoader
                     }
                 } catch (ClassNotFoundException cnfe)
                 {
-                    // TODO: What to do?
+                    /// Eat it.  No idea why this might happen right now.
+                    /// TODO: investigate further
+                    Log.wtf("[internal]", cnfe);
                 }
             }
         }

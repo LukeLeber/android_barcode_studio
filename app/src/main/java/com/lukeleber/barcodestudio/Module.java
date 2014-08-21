@@ -8,10 +8,12 @@
 
 package com.lukeleber.barcodestudio;
 
+import java.io.Serializable;
+
 /**
  * Modules are the individual bars or spaces that make up the smallest data units of a barcode.
  */
-public final class Module
+public final class Module implements Serializable
 {
     /// Is this a bar or a space?
     private final boolean on;

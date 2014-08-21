@@ -8,6 +8,7 @@
 
 package com.lukeleber.barcodestudio;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -19,7 +20,8 @@ import java.util.List;
  * A Sequence is a series of Modules that together form a barcode encoding
  */
 public final class Sequence
-        implements Iterable<Module>
+        implements Iterable<Module>,
+                   Serializable
 {
     /// The underlying container
     private final List<Module> modules;

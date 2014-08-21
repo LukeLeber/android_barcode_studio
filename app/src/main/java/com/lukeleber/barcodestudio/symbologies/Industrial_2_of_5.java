@@ -114,7 +114,7 @@ public class Industrial_2_of_5
      * @return the character set that is used in this Symbology
      */
     @Override
-    public CharSequence getCharset()
+    public String getCharset()
     {
         return null;
     }

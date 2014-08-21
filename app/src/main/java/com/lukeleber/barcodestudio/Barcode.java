@@ -8,11 +8,13 @@
 
 package com.lukeleber.barcodestudio;
 
+import java.io.Serializable;
+
 /**
  * Barcodes are basically classes that hold and maintain the relationship between a text string
  * and its encoding based upon a specified symbology.
  */
-public final class Barcode
+public final class Barcode implements Serializable
 {
     /// The symbology to use with this barcode
     private final Symbology symbology;
@@ -51,6 +53,16 @@ public final class Barcode
         this.symbology = symbology;
         this.text = symbology.decode(encoding);
         this.encoding = encoding;
+    }
+
+    /**
+     * Retrieves the Symbology of this Barcode
+     *
+     * @return the Symbology of this Barcode
+     */
+    public Symbology getSymbology()
+    {
+        return symbology;
     }
 
     /**

@@ -29,11 +29,33 @@ public interface Symbology
         /// Should this Symbology use an extended character set?
         protected boolean useExtendedCharset;
 
+        /**
+         * Applies the options of the provided Configuration to this one.
+         *
+         * @param other the Configuration to copy
+         */
+        public void apply(Configuration other)
+        {
+            this.useChecksum = other.useChecksum;
+            this.useExtendedCharset = other.useExtendedCharset;
+        }
+
+        /**
+         * Does this configuration use a checksum?
+         *
+         * @return true if this configuration uses a checksum, otherwise false
+         */
         public boolean useChecksum()
         {
             return useChecksum;
         }
 
+        /**
+         * Does this configuration use an extended character set?
+         *
+         * @return true if this configuration uses an extended character set, otherwise false
+         *
+         */
         public boolean useExtendedCharset()
         {
             return useExtendedCharset;
@@ -127,7 +149,7 @@ public interface Symbology
      *
      * @return the character set that is used in this Symbology
      */
-    CharSequence getCharset();
+    String getCharset();
 
     /**
      * Retrieves the start sequence of this symbology

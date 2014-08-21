@@ -29,6 +29,22 @@ public class PrintingMedia
     public final float columnPadding;
     public final float rowPadding;
 
+    @Override
+    public String toString()
+    {
+        return new StringBuilder("Page Width: ").append(pageWidth)
+                    .append("\nPage Height: ").append(pageHeight)
+                    .append("\nOrientation: ").append(orientation.name())
+                    .append("\nLeft Margin: ").append(marginLeft)
+                    .append("\nTop Margin: ").append(marginTop)
+                    .append("\nRight Margin: ").append(marginRight)
+                .append("\nBottom Margin: ").append(marginBottom)
+                .append("\nVertical Count: ").append(numVerticalBarCodes)
+                .append("\nHorizontal Count: ").append(numHorizontalBarCodes)
+                .append("\nColumn Padding: ").append(columnPadding)
+                .append("\nRow Padding: ").append(rowPadding).toString();
+    }
+
     public PrintingMedia(Configuration config)
     {
         this.pageWidth = config.pageWidth;
@@ -66,16 +82,18 @@ public class PrintingMedia
         );
     }
 
+    /// todo: rendering & printer resolution
 
     public enum Orientation
     {
         PORTRAIT,
-        LANDSCAPE;
+        LANDSCAPE
     }
 
     public static class Configuration
             implements Serializable
     {
+        /// Reasonable Defaults
         private float pageWidth = 8.5f;
         private float pageHeight = 11.0f;
         private Orientation orientation = Orientation.PORTRAIT;
@@ -83,8 +101,8 @@ public class PrintingMedia
         private float marginRight = 0.25f;
         private float marginTop = 0.25f;
         private float marginBottom = 0.25f;
-        private int numVerticalBarCodes = 5;
-        private int numHorizontalBarCodes = 8;
+        private int numVerticalBarCodes = 8;
+        private int numHorizontalBarCodes = 5;
         private float barCodeWidth = 1.0f;
         private float barCodeHeight = 1.0f;
         private float columnPadding = 0.25f;

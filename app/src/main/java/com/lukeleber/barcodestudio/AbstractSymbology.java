@@ -27,6 +27,11 @@ public abstract class AbstractSymbology
         this.configuration = config;
     }
 
+    /**
+     * Retrieves the {@link Configuration} of this symbology.
+     *
+     * @return the Configuration of this symbology.
+     */
     @Override
     public final Configuration getConfig()
     {
