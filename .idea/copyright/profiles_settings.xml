@@ -1,3 +1,11 @@
 <component name="CopyrightManager">
-  <settings default="" />
+  <settings default="KILLGPL">
+    <LanguageOptions name="JAVA">
+      <option name="fileTypeOverride" value="3" />
+      <option name="block" value="false" />
+      <option name="separateAfter" value="true" />
+      <option name="lenAfter" value="100" />
+      <option name="filler" value="_" />
+    </LanguageOptions>
+  </settings>
 </component>

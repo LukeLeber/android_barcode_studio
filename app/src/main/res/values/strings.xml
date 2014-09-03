@@ -1,9 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- "Errors" -->
+
+    <!-- "Globals" -->
+
     <string name="app_name">Barcode Studio</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_print_dialog">PrintDialogActivity</string>
+    <string name="title_activity_symbology_settings">SymbologySettings</string>
+    <string name="title_activity_page_setup">PageSetup</string>
+    <string name="title_activity_page_setup_preview">PageSetupPreview</string>
 
+    <!-- "Inter-Activity" -->
+    <string name="symbology_settings_extra_key">symbology_settings</string>
+    <string name="print_media_settings_extra_key">page_setup</string>
+    <!-- com.lukeleber.barcodestudio.gui.BarcodeStudio -->
+    <string name="symbologies_package">com.lukeleber.barcodestudio.symbologies</string>
+    <string name="symbology_settings_update_confirmation">Symbology settings have been updated.</string>
+    <string name="media_settings_update_confirmation">Page settings have been updated.</string>
+
+    <!-- com.lukeleber.barcodestudio.gui.SymbologySettings -->
+    <string name="symbology_settings_activity_configuration_saved">Configuration Saved - Press back to return to the studio</string>
+
+    <!-- com.lukeleber.barcodestudio.gui.PrintingMediaSettings -->
+    <string name="printing_media_settings_configuration_saved">Configuration Saved - Press back to return to the studio</string>
+
+    <!-- com.lukeleber.barcodestudio.gui.PrintingMediaPreview -->
+    <string name="printing_media_preview_toast">Click back to return to settings.</string>
+    <string name="title_activity_print_preview">PrintPreview</string>
+    <string name="title_activity_print">Print</string>
+
+    <!-- com.lukeleber.barcodestudio.gui.PrintPreview-->
+    <string name="print_preview_return_to_studio_toast">Press back to return to the studio</string>
 </resources>

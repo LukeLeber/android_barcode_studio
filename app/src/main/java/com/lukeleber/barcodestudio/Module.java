@@ -1,17 +1,18 @@
-/**
- * This file is protected under the KILLGPL.
- * For more information visit https://github.com/LukeLeber/KILLGPL
- *
- * Copyright Luke A. Leber <LukeLeber@gmail.com> 8.10.2014
- *
- */
+// This file is protected under the KILLGPL.
+// For more information visit <insert_valid_link_to_killgpl_here>
+// <p/>
+// Copyright (c) Luke A. Leber <LukeLeber@gmail.com> 2014
+//__________________________________________________________________________________________________
 
 package com.lukeleber.barcodestudio;
+
+import java.io.Serializable;
 
 /**
  * Modules are the individual bars or spaces that make up the smallest data units of a barcode.
  */
 public final class Module
+        implements Serializable
 {
     /// Is this a bar or a space?
     private final boolean on;
@@ -22,8 +23,10 @@ public final class Module
     /**
      * Constructs a Module with the provided 'on' flag and weight
      *
-     * @param on     is this Module a bar or a space?
-     * @param weight the weight (in units of 'x') of this Module
+     * @param on
+     *         is this Module a bar or a space?
+     * @param weight
+     *         the weight (in units of 'x') of this Module
      */
     public Module(boolean on, int weight)
     {
@@ -35,7 +38,6 @@ public final class Module
      * Does this Module represent a bar or a space?
      *
      * @return true if this Module represents a bar, otherwise false
-     *
      */
     public boolean isOn()
     {
@@ -46,7 +48,6 @@ public final class Module
      * Retrieves the weight (in units of 'x') of this Module
      *
      * @return the weight of this Module
-     *
      */
     public int getWeight()
     {

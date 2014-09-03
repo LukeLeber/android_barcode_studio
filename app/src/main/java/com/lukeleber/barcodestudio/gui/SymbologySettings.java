@@ -67,7 +67,7 @@ public class SymbologySettings
         /// this, we just pass the updated object back to the calling
         /// activity and process it there.
         Intent intent = new Intent(this, BarcodeStudio.class);
-        intent.putExtra("symbology", symbology);
+        intent.putExtra(super.getString(R.string.symbology_settings_extra_key), symbology);
         setResult(Activity.RESULT_OK, intent);
 
         /// Now we can finish() this activity as normal
@@ -86,7 +86,7 @@ public class SymbologySettings
 
         ButterKnife.inject(this);
 
-        this.symbology = (Symbology) getIntent().getExtras().getSerializable("symbology");
+        this.symbology = (Symbology) getIntent().getExtras().getSerializable(super.getString(R.string.symbology_settings_extra_key));
 
         /// Should never happen
         assert this.symbology != null : "Symbology should not have been null.";

@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import com.lukeleber.barcodestudio.R;
 import com.lukeleber.barcodestudio.rendering.PrintingMedia;
@@ -288,32 +289,38 @@ public class PrintingMediaSettings
     @OnClick(R.id.apply)
     void onApplyButtonClicked()
     {
+        this.pageSetup = new PrintingMedia(new PrintingMedia.Configuration()
+                .setPageWidth(Float.parseFloat(pageWidth.getText().toString()))
+                .setPageHeight(Float.parseFloat(pageHeight.getText().toString()))
+                .setOrientation(portrait.isChecked() ? PORTRAIT : LANDSCAPE)
+                .setMarginLeft(Float.parseFloat(marginLeft.getText().toString()))
+                .setMarginRight(Float.parseFloat(marginRight.getText().toString()))
+                .setMarginTop(Float.parseFloat(marginTop.getText().toString()))
+                .setMarginBottom(Float.parseFloat(marginBottom.getText().toString()))
+                .setColumnPadding(Float.parseFloat(columnPadding.getText().toString()))
+                .setRowPadding(Float.parseFloat(rowPadding.getText().toString()))
+                .setNumHorizontalBarCodes(Integer.parseInt(horizontalBarcodeCount.getText().toString()))
+                .setNumVerticalBarCodes(Integer.parseInt(verticalBarcodeCount.getText().toString()))
+                .setBarCodeWidth(Float.parseFloat(barcodeWidth.getText().toString()))
+                .setBarCodeHeight(Float.parseFloat(barcodeHeight.getText().toString())));
+        Toast.makeText(this, R.string.printing_media_settings_configuration_saved, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onBackPressed()
+    {
         Intent result = new Intent();
-        result.putExtra("page_setup",
-                new PrintingMedia(new PrintingMedia.Configuration()
-                        .setPageWidth(Float.parseFloat(pageWidth.getText().toString()))
-                        .setPageHeight(Float.parseFloat(pageHeight.getText().toString()))
-                        .setOrientation(portrait.isChecked() ? PORTRAIT : LANDSCAPE)
-                        .setMarginLeft(Float.parseFloat(marginLeft.getText().toString()))
-                        .setMarginRight(Float.parseFloat(marginRight.getText().toString()))
-                        .setMarginTop(Float.parseFloat(marginTop.getText().toString()))
-                        .setMarginBottom(Float.parseFloat(marginBottom.getText().toString()))
-                        .setColumnPadding(Float.parseFloat(columnPadding.getText().toString()))
-                        .setRowPadding(Float.parseFloat(rowPadding.getText().toString()))
-                        .setNumHorizontalBarCodes(Integer.parseInt(horizontalBarcodeCount.getText().toString()))
-                        .setNumVerticalBarCodes(Integer.parseInt(verticalBarcodeCount.getText().toString()))
-                        .setBarCodeWidth(Float.parseFloat(barcodeWidth.getText().toString()))
-                        .setBarCodeHeight(Float.parseFloat(barcodeHeight.getText().toString())))
-        );
+        result.putExtra(super.getString(R.string.print_media_settings_extra_key), pageSetup);
         setResult(Activity.RESULT_OK, result);
-        finish();
+
+        super.onBackPressed();
     }
 
     @OnClick(R.id.preview)
     void onPreviewButtonClicked()
     {
-        Intent intent = new Intent(this, PageSetupPreview.class);
-        intent.putExtra("page_setup", pageSetup);
+        Intent intent = new Intent(this, PrintingMediaPreview.class);
+        intent.putExtra(super.getString(R.string.print_media_settings_extra_key), pageSetup);
         startActivity(intent);
     }
 
@@ -381,7 +388,7 @@ public class PrintingMediaSettings
 
         ButterKnife.inject(this);
 
-        this.pageSetup = (PrintingMedia) getIntent().getSerializableExtra("config");
+        this.pageSetup = (PrintingMedia) getIntent().getSerializableExtra(super.getString(R.string.print_media_settings_extra_key));
         initPreservedInput();
         updateGUI();
     }
