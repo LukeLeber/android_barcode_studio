@@ -4,11 +4,17 @@
       <w>barcodes</w>
       <w>barcodestudio</w>
       <w>butterknife</w>
+<<<<<<< HEAD
       <w>iter</w>
       <w>killgpl</w>
       <w>leber</w>
       <w>lukeleber</w>
       <w>renderers</w>
+=======
+      <w>killgpl</w>
+      <w>leber</w>
+      <w>lukeleber</w>
+>>>>>>> branch 'master' of https://github.com/LukeLeber/android_barcode_studio.git
       <w>symbologies</w>
       <w>symbology</w>
     </words>

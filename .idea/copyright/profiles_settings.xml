@@ -1,4 +1,5 @@
 <component name="CopyrightManager">
+<<<<<<< HEAD
   <settings default="KILLGPL">
     <LanguageOptions name="JAVA">
       <option name="fileTypeOverride" value="3" />
@@ -8,4 +9,7 @@
       <option name="filler" value="_" />
     </LanguageOptions>
   </settings>
+=======
+  <settings default="" />
+>>>>>>> branch 'master' of https://github.com/LukeLeber/android_barcode_studio.git
 </component>

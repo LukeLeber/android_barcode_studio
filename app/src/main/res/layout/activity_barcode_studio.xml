@@ -32,6 +32,7 @@
                     android:layout_weight="1"/>
 
                 <Button
+<<<<<<< HEAD
                     android:id="@+id/configure_symbology"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -183,6 +184,157 @@
                 <Button
                     android:id="@+id/print"
                     android:enabled="false"
+=======
+                    android:id="@+id/symbologySettings"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/symbologies"
+                    android:text="settings"
+                    />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Printing Options"/>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/radio_button_holder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RadioGroup
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+
+                        >
+
+                        <RadioButton
+                            android:id="@+id/single"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:checked="true"
+                            android:text="Single"/>
+
+                        <RadioButton
+                            android:id="@+id/range"
+                            android:layout_width="wrap_content"
+                            android:layout_height="65dp"
+                            android:checked="false"
+                            android:text="Range"
+                            />
+                    </RadioGroup>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="249dp"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/radio_button_holder"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/encodingText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:hint="Encoding Text"
+                        android:maxWidth="138dip"
+                        android:scrollHorizontally="true"
+                        android:textSize="12sp"
+                        />
+
+                    <EditText
+                        android:id="@+id/barcodeCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignEnd="@+id/range2"
+                        android:layout_alignRight="@+id/range2"
+                        android:layout_toRightOf="@+id/encodingText"
+                        android:hint="# bcs"
+                        android:digits="0123456789"
+                        android:maxWidth="69dp"
+                        android:scrollHorizontally="true"
+                        android:textSize="12sp"/>
+
+                    <EditText
+                        android:id="@+id/range1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/encodingText"
+                        android:hint="range-begin"
+                        android:maxWidth="120dp"
+                        android:enabled="false"
+                        android:scrollHorizontally="true"
+                        android:digits="0123456789"
+                        android:textSize="12sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/to"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/encodingText"
+                        android:layout_marginTop="12dip"
+                        android:layout_toRightOf="@+id/range1"
+                        android:text="to"
+                        android:textSize="12sp"/>
+
+                    <EditText
+                        android:id="@+id/range2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/barcodeCount"
+                        android:layout_toRightOf="@+id/to"
+                        android:hint="range-end"
+                        android:digits="0123456789"
+                        android:maxWidth="112dp"
+                        android:enabled="false"
+                        android:scrollHorizontally="true"
+                        android:textSize="12sp"/>
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                >
+
+                <Button
+                    android:id="@+id/pageSetup"
+                    android:layout_width="fill_parent"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="Page Setup"
+                    android:textSize="10sp"
+                    />
+
+                <Button
+                    android:id="@+id/print_preview"
+                    android:layout_width="fill_parent"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="Preview"
+                    android:textSize="10sp"
+                    />
+
+                <Button
+                    android:id="@+id/print"
+>>>>>>> branch 'master' of https://github.com/LukeLeber/android_barcode_studio.git
                     android:layout_width="fill_parent"
                     android:layout_height="100sp"
                     android:layout_weight="1"
