@@ -9,6 +9,8 @@
 package com.lukeleber.barcodestudio.symbologies;
 
 import com.lukeleber.barcodestudio.AbstractSymbology;
+import com.lukeleber.barcodestudio.DecoderException;
+import com.lukeleber.barcodestudio.EncoderException;
 import com.lukeleber.barcodestudio.Module;
 import com.lukeleber.barcodestudio.Sequence;
 
@@ -18,7 +20,7 @@ import java.util.Map;
 /**
  * An implementation of the Code39 Specification (http://en.wikipedia.org/wiki/Code_39)
  */
-public class Code39
+/*package*/ class Code39
         extends AbstractSymbology
 {
 
@@ -108,7 +110,7 @@ public class Code39
     }
 
     @Override
-    public CharSequence getCharset()
+    public String getCharset()
     {
         return CHARSET;
     }
@@ -158,11 +160,18 @@ public class Code39
     @Override
     public Sequence encode(String text)
     {
+        String charset = super.getConfig().useExtendedCharset() ? EXTENDED_CHARSET : CHARSET;
+
         Map<Character, Sequence> encodingTable
                 = super.getConfig().useExtendedCharset() ? EXTENDED_ENCODING_TABLE : ENCODING_TABLE;
+
         Sequence rv = new Sequence(QUIET_ZONE).append(START_STOP).append(PAD);
         for (char c : text.toCharArray())
         {
+            if(charset.indexOf(c) == -1)
+            {
+                throw new EncoderException("Illegal character \"" + c + "\" is not supported by this symbology.");
+            }
             rv.append(encodingTable.get(c));
             rv.append(PAD);
         }
@@ -184,29 +193,24 @@ public class Code39
         for (int i = 9; i < sequence.size() - (super.getConfig().useChecksum() ? 18 : 9); i += 9)
         {
             Sequence slice = sequence.slice(i, i + 8);
+            boolean found = false;
             for (Map.Entry<Character, Sequence> e : encodingTable.entrySet())
             {
                 if (e.getValue().equals(slice))
                 {
                     text += e.getKey();
+                    found = true;
                     break;
                 }
+            }
+            if(!found)
+            {
+                throw new DecoderException("There is an error in the encoding passed to " +
+                        "this symbology.");
             }
         }
         text += '*';
         return text;
-    }
-
-    @Override
-    public Sequence getStartSequence()
-    {
-        return START_STOP;
-    }
-
-    @Override
-    public Sequence getStopSequence()
-    {
-        return START_STOP;
     }
 
     @Override
@@ -222,26 +226,11 @@ public class Code39
     }
 
     /**
-     * Constructs a Code39 symbology with the provided configuration parameters
-     *
-     * @param useChecksum        Should a checksum digit be included in encoding and discarded
-     *                           in decoding?
-     * @param useExtendedCharset Should the extended character set be used?
-     */
-    public Code39(boolean useChecksum, boolean useExtendedCharset)
-    {
-        super(new Configuration().setChecksumEnabled(useChecksum)
-                .setExtendedCharsetEnabled(useExtendedCharset));
-        ;
-    }
-
-    /**
      * Constructs a Code39 with a default configuration
      */
-    public Code39()
+    /*package*/ Code39()
     {
         super(new Configuration());
-        ;
     }
 
     @Override

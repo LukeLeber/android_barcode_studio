@@ -1,13 +1,12 @@
-/**
- * This file is protected under the KILLGPL.
- * For more information visit https://github.com/LukeLeber/KILLGPL
- *
- * Copyright Luke A. Leber <LukeLeber@gmail.com> 8.10.2014
- *
- */
+// This file is protected under the KILLGPL.
+// For more information visit <insert_valid_link_to_killgpl_here>
+// <p/>
+// Copyright (c) Luke A. Leber <LukeLeber@gmail.com> 2014
+//__________________________________________________________________________________________________
 
 package com.lukeleber.barcodestudio;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -19,7 +18,8 @@ import java.util.List;
  * A Sequence is a series of Modules that together form a barcode encoding
  */
 public final class Sequence
-        implements Iterable<Module>
+        implements Iterable<Module>,
+                   Serializable
 {
     /// The underlying container
     private final List<Module> modules;
@@ -36,14 +36,14 @@ public final class Sequence
      * Internal Constructor - Optionally makes a read-only Sequence.  Any attempts to modify the
      * resulting Sequence will result in an {@link java.lang.UnsupportedOperationException}
      *
-     * @param readOnly Should this Sequence be read-only?
-     *
-     * @param firstOn Should the first Module be a bar or a space?
-     *
-     * @param weights The weights of the subsequent Modules
-     *
+     * @param readOnly
+     *         Should this Sequence be read-only?
+     * @param firstOn
+     *         Should the first Module be a bar or a space?
+     * @param weights
+     *         The weights of the subsequent Modules
      */
-    @SafeVarargs
+    @SuppressWarnings("unused")
     Sequence(boolean readOnly, boolean firstOn, int... weights)
     {
         List<Module> modules = new ArrayList<Module>();
@@ -58,9 +58,10 @@ public final class Sequence
     /**
      * Copy constructor
      *
-     * @param rhs the Sequence to copy into this one
-     *
+     * @param rhs
+     *         the Sequence to copy into this one
      */
+    @SuppressWarnings("unused")
     public Sequence(Sequence rhs)
     {
         this.modules = new ArrayList<Module>();
@@ -70,9 +71,9 @@ public final class Sequence
     /**
      * Constructs a Sequence from the provided modules
      *
-     * @param modules the Modules to populate this Sequence with
+     * @param modules
+     *         the Modules to populate this Sequence with
      */
-    @SafeVarargs
     public Sequence(Module... modules)
     {
         this.modules = new ArrayList<Module>(Arrays.asList(modules));
@@ -81,10 +82,12 @@ public final class Sequence
     /**
      * Constructs a Sequence with the provided 'on' flag and weights
      *
-     * @param firstOn Should the first Module be a bar or a space?
-     * @param weights The weights of the subsequent Modules
+     * @param firstOn
+     *         Should the first Module be a bar or a space?
+     * @param weights
+     *         The weights of the subsequent Modules
      */
-    @SafeVarargs
+    @SuppressWarnings("unused")
     public Sequence(boolean firstOn, int... weights)
     {
         this.modules = new ArrayList<Module>();
@@ -98,10 +101,9 @@ public final class Sequence
     /**
      * Constructs a Sequence with the provided weights - with a bar as the first Module
      *
-     * @param weights The weights of the subsequent Modules
-     *
+     * @param weights
+     *         The weights of the subsequent Modules
      */
-    @SafeVarargs
     public Sequence(int... weights)
     {
         this.modules = new ArrayList<Module>();
@@ -116,8 +118,8 @@ public final class Sequence
     /**
      * Constructs a Sequence from the provided Collection of Modules
      *
-     * @param modules The collection of Modules to use
-     *
+     * @param modules
+     *         The collection of Modules to use
      */
     Sequence(Collection<Module> modules)
     {
@@ -127,10 +129,10 @@ public final class Sequence
     /**
      * Appends the provided Sequence onto this Sequence
      *
-     * @param sequence the Sequence to append
+     * @param sequence
+     *         the Sequence to append
      *
      * @return this
-     *
      */
     public Sequence append(Sequence sequence)
     {
@@ -141,10 +143,10 @@ public final class Sequence
     /**
      * Appends the provided Module onto this Sequence
      *
-     * @param module the Module to append
+     * @param module
+     *         the Module to append
      *
      * @return this
-     *
      */
     public Sequence append(Module module)
     {
@@ -155,15 +157,15 @@ public final class Sequence
     /**
      * Retrieves a "sub-sequence" from the provided range
      *
-     * @param begin the start position
-     *
-     * @param end the end position
+     * @param begin
+     *         the start position
+     * @param end
+     *         the end position
      *
      * @return the requested sub-sequence
      *
-     * @throws java.lang.IndexOutOfBoundsException if either extent lies outside of the bounds of
-     * this Sequence
-     *
+     * @throws java.lang.IndexOutOfBoundsException
+     *         if either extent lies outside of the bounds of this Sequence
      */
     public Sequence slice(int begin, int end)
     {
@@ -174,7 +176,6 @@ public final class Sequence
      * Retrieves the number of Modules in this Sequence
      *
      * @return the number of Modules in this Sequence
-     *
      */
     public int size()
     {
@@ -185,11 +186,22 @@ public final class Sequence
      * Retrieves an Iterator to the underlying container
      *
      * @return an Iterator to the underlying container
-     *
      */
     @Override
     public Iterator<Module> iterator()
     {
         return modules.iterator();
+    }
+
+    @Override
+    public final boolean equals(Object rhs)
+    {
+        if(!(rhs instanceof Sequence))
+        {
+            return false;
+        }
+        Sequence other = (Sequence)rhs;
+        return this.modules.equals(other.modules);
+
     }
 }

@@ -1,10 +1,8 @@
-/**
- * This file is protected under the KILLGPL.
- * For more information visit https://www.github.com/lukeleber/KILLGPL
- *
- * Copyright Luke <LukeLeber@gmail.com> 8/10/2014.
- *
- */
+// This file is protected under the KILLGPL.
+// For more information visit <insert_valid_link_to_killgpl_here>
+// <p/>
+// Copyright (c) Luke A. Leber <LukeLeber@gmail.com> 2014
+//__________________________________________________________________________________________________
 package com.lukeleber.barcodestudio;
 
 /**
@@ -13,6 +11,12 @@ package com.lukeleber.barcodestudio;
 public class DecoderException
         extends RuntimeException
 {
+    /**
+     * Constructs a {@link DecoderException}
+     *
+     * @param message
+     *         a brief description of the decoding error
+     */
     public DecoderException(String message)
     {
         super(message);

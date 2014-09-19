@@ -1,9 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="match_parent"
-    tools:context="${packageName}.${activityClass}">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="${packageName}.${activityClass}">
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -15,191 +15,181 @@
             android:orientation="vertical">
 
             <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Select a Symbology"
-        android:id="@+id/symbologyText"
-        android:layout_marginTop="20dp"/>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="75dp">
-        <Spinner
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/symbologies"
-            android:layout_weight="1"/>
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="settings"
-            android:layout_toRightOf="@+id/symbologies"
-            android:id="@+id/symbologySettings"
-            />
-    </LinearLayout>
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Printing Options"
-        android:id="@+id/textView" />
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:id="@+id/radio_button_holder">
-            <RadioGroup
-                android:layout_width="fill_parent"
+                android:id="@+id/symbologyText"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Select a Symbology"/>
 
-                >
-                <RadioButton
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="75dp">
+
+                <Spinner
+                    android:id="@+id/symbologies"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <Button
+                    android:id="@+id/configure_symbology"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/symbologies"
+                    android:text="settings"
+                    />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Printing Options"/>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/radio_button_holder"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Single"
-                    android:id="@+id/single"
-                    android:layout_gravity="bottom"
-                    android:checked="true"/>
+                    android:orientation="vertical">
 
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="65dp"
-                    android:text="Range"
-                    android:id="@+id/range"
-                    android:checked="false"
+                    <RadioGroup
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+
+                        >
+
+                        <RadioButton
+                            android:id="@+id/batch_mode_radio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:checked="true"
+                            android:text="Single"/>
+
+                        <RadioButton
+                            android:id="@+id/range_mode_radio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="65dp"
+                            android:checked="false"
+                            android:text="Range"
+                            />
+                    </RadioGroup>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="249dp"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/radio_button_holder"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/batch_mode_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:hint="Encoding Text"
+                        android:maxWidth="138dip"
+                        android:scrollHorizontally="true"
+                        android:textSize="12sp"
+                        />
+
+                    <EditText
+                        android:id="@+id/batch_mode_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignEnd="@+id/range_mode_end"
+                        android:layout_alignRight="@+id/range_mode_end"
+                        android:layout_toRightOf="@+id/batch_mode_text"
+                        android:hint="# bcs"
+                        android:digits="0123456789"
+                        android:maxWidth="69dp"
+                        android:scrollHorizontally="true"
+                        android:textSize="12sp"/>
+
+                    <EditText
+                        android:id="@+id/range_mode_start"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/batch_mode_text"
+                        android:hint="range-begin"
+                        android:maxWidth="120dp"
+                        android:enabled="false"
+                        android:scrollHorizontally="true"
+                        android:digits="0123456789"
+                        android:textSize="12sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/to"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/batch_mode_text"
+                        android:layout_marginTop="12dip"
+                        android:layout_toRightOf="@+id/range_mode_start"
+                        android:text="to"
+                        android:textSize="12sp"/>
+
+                    <EditText
+                        android:id="@+id/range_mode_end"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/batch_mode_count"
+                        android:layout_toRightOf="@+id/to"
+                        android:hint="range-end"
+                        android:digits="0123456789"
+                        android:maxWidth="112dp"
+                        android:enabled="false"
+                        android:scrollHorizontally="true"
+                        android:textSize="12sp"/>
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                >
+
+                <Button
+                    android:id="@+id/configure_page"
+                    android:layout_width="fill_parent"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="Page Setup"
+                    android:textSize="10sp"
                     />
-            </RadioGroup>
-        </LinearLayout>
-        <RelativeLayout
-            android:layout_width="249dp"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_toRightOf="@id/radio_button_holder">
 
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/encodingText"
-                android:hint="Encoding Text"
-                android:textSize="12sp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:scrollHorizontally="true"
-                android:maxWidth="138dip"
-                />
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="# bcs"
-                android:textSize="12sp"
-                android:id="@+id/numPages"
-                android:layout_toRightOf="@+id/encodingText"
-                android:scrollHorizontally="true"
-                android:maxWidth="69dp"
-                android:layout_alignRight="@+id/range2"
-                android:layout_alignEnd="@+id/range2"/>
+                <Button
+                    android:id="@+id/print_preview"
+                    android:enabled="false"
+                    android:layout_width="fill_parent"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="Preview"
+                    android:textSize="10sp"
+                    />
 
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/range1"
-                android:hint="range-min"
-                android:textSize="12sp"
-                android:layout_below="@+id/encodingText"
-                android:scrollHorizontally="true"
-                android:maxWidth="106dp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TO"
-                android:textSize="12sp"
-                android:layout_toRightOf="@+id/range1"
-                android:layout_below="@+id/encodingText"
-                android:layout_marginTop="12dip"
-                android:id="@+id/to"/>
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/range2"
-                android:hint="range-max"
-                android:textSize="12sp"
-                android:layout_below="@+id/numPages"
-                android:layout_toRightOf="@+id/to"
-                android:scrollHorizontally="true"
-                android:maxWidth="110dp"/>
-        </RelativeLayout>
-
-
-
-    </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="50dp"
-        android:weightSum="3"
-        >
-
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="100sp"
-            android:text="Page Setup"
-            android:textSize="12sp"
-            android:id="@+id/pageSetup"
-            android:layout_weight="1"
-            />
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="100sp"
-            android:text="Find Printer"
-            android:textSize="12sp"
-            android:id="@+id/findPrinter"
-            android:layout_weight="1"
-            />
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="100sp"
-            android:text="Print To PDF"
-            android:textSize="12sp"
-            android:id="@+id/prinToPdf"
-            android:layout_weight="1"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="3">
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="100sp"
-            android:text="Preview"
-            android:textSize="12sp"
-            android:id="@+id/preview"
-            android:layout_weight="1"
-            />
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="100sp"
-            android:text="Button"
-            android:id="@+id/btn1"
-            android:textSize="12sp"
-            android:layout_weight="1"
-            />
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="100sp"
-            android:text="Button"
-            android:id="@+id/btn"
-            android:textSize="12sp"
-            android:layout_weight="1"
-            />
-    </LinearLayout>
+                <Button
+                    android:id="@+id/print"
+                    android:enabled="false"
+                    android:layout_width="fill_parent"
+                    android:layout_height="100sp"
+                    android:layout_weight="1"
+                    android:text="Print"
+                    android:textSize="10sp"
+                    />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
