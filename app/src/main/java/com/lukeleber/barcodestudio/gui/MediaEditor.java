@@ -6,7 +6,10 @@
 
 package com.lukeleber.barcodestudio.gui;
 
+<<<<<<< HEAD
 import android.annotation.TargetApi;
+=======
+>>>>>>> branch 'master' of https://github.com/LukeLeber/android_barcode_studio.git
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

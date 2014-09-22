@@ -38,6 +38,10 @@ public class CharsetInputFilter
                                Spanned dest, int dstart, int dend)
     {
         /// TODO: Research regex escape all...HACK'D!
+<<<<<<< HEAD
         return source.toString().replaceAll("[^" + charset.replace("\\", "\\\\").replace("-", "\\-").replace("[", "\\[").replace("]", "\\]").replace("(", "\\(").replace(")", "\\)").replace(".", "\\.") + "]", "");
+=======
+        return source.toString().replaceAll("[^" + charset.replace("-", "\\-").replace(".", "\\.") + "]", "");
+>>>>>>> branch 'master' of https://github.com/LukeLeber/android_barcode_studio.git
     }
 }

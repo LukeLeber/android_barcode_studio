@@ -83,6 +83,7 @@ public abstract class EnhancedActivity
      * @param resourceID
      *         the resource ID (IE R.string.XXX) to show in the toast
      */
+<<<<<<< HEAD
     @SuppressWarnings("unused")
     protected final void longToast(int resourceID)
     {
@@ -90,6 +91,13 @@ public abstract class EnhancedActivity
     }
 
     @SuppressWarnings("unused")
+=======
+    protected final void longToast(int resourceID)
+    {
+        Toast.makeText(this, super.getString(resourceID), Toast.LENGTH_LONG).show();
+    }
+
+>>>>>>> branch 'master' of https://github.com/LukeLeber/android_barcode_studio.git
     protected final void shortToast(String text)
     {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();

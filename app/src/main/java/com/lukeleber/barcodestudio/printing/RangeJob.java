@@ -46,6 +46,14 @@ public class RangeJob extends Job implements Iterable<Barcode>
             barcodes.add(new Barcode(String.valueOf(begin), symbology));
         }
         while(begin++ < end);
+<<<<<<< HEAD
+=======
+        new Throwable().printStackTrace();
+        for(Barcode bc : barcodes)
+        {
+            System.out.println("BC: " + bc.getText());
+        }
+>>>>>>> branch 'master' of https://github.com/LukeLeber/android_barcode_studio.git
     }
 
     /**

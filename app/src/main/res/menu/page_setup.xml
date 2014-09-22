@@ -1,6 +1,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+<<<<<<< HEAD
     tools:context="com.lukeleber.barcodestudio.gui.MediaEditor" >
+=======
+<<<<<<< HEAD
+    tools:context="com.lukeleber.barcodestudio.gui.MediaEditor" >
+=======
+    tools:context="com.lukeleber.barcodestudio.gui.PrintingMediaSettings" >
+>>>>>>> branch 'master' of https://github.com/LukeLeber/android_barcode_studio.git
+>>>>>>> branch 'master' of https://github.com/LukeLeber/android_barcode_studio.git
     <item android:id="@+id/action_settings"
         android:title="@string/action_settings"
         android:orderInCategory="100"

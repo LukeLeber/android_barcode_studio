@@ -19,8 +19,16 @@ public class Symbologies
     {
         List<Symbology> rv = Arrays.<Symbology>asList(
                 /// TODO: Add implementations here as the project evolves
+<<<<<<< HEAD
                 new Code39(),
                 new Code128()
+=======
+                new Code39()//,
+               // new Industrial2of5(),
+               // new Interleaved2of5(),
+               // new Code128(),
+               // new Codeabar()
+>>>>>>> branch 'master' of https://github.com/LukeLeber/android_barcode_studio.git
         );
         Collections.sort(
                 rv,

@@ -36,7 +36,10 @@ public class BatchJob
     public BatchJob(Media media, Barcode barcode, int count)
     {
         super(media);
+<<<<<<< HEAD
         System.out.println("Batch job with barcode: " + barcode);
+=======
+>>>>>>> branch 'master' of https://github.com/LukeLeber/android_barcode_studio.git
         this.barcode = barcode;
         this.count = count;
     }
